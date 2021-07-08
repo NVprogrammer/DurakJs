@@ -67,3 +67,7 @@
 .beat{
     box-shadow: 0 5px 5px 2px indigo;
 }
+
+.out{
+    visibility: hidden;
+}

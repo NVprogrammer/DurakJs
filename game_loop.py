@@ -109,13 +109,15 @@ class Player():
                 for i in av_defence.keys():
                     de = ''
                     res=False
+                    eel.set_def_false()()
                     while(not res):
                         a = eel.choose_def_card_js(i, av_defence[i])()
                         res=a[0]
                         de=a[1]
                         print('in defence',res)
                         eel.sleep(0.05)
-
+                    eel.remove_css_def();
+                    eel.sleep(0.01);
 
 
                     if (de in av_defence[i]):
@@ -173,6 +175,8 @@ class Player():
             if (dec == 'y'):
                 self.end_move = True
                 self.awaiting=False
+                print(*zip(board['attack'],board['defence']))
+                eel.add_out(*zip(board['attack'],board['defence']))
                 return
             if (dec == 'n'):
                 self.awaiting = True
@@ -185,11 +189,10 @@ class Player():
         print(av_to_attack)
         res=True
         c=[]
+        eel.set_res_true()()
         while(res):# выбор карт для атаки, ждем пока не нажмёт кнопку end move
-            a=eel.choose_att_card_js(av_to_attack)()
-            res=a[0]
-            c=a[1]
-            eel.sleep(0.05)
+            res,c=eel.choose_att_card_js(av_to_attack)()
+            eel.sleep(1)
         # c = eel.end_move_js(av_to_attack)()
         print('c', c)
         if (c.__len__() > 1):
